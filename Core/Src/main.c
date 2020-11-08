@@ -17,10 +17,10 @@
 #include "gpio.h"
 
 // systick interrupt handler
-//void SysTick_Handler()
-//{
-	//to be defined if systick interrupt is enabled.
-//}
+/*void SysTick_Handler()
+{
+
+}*/
 
 void     SystemClock_Config(void);
 
