@@ -173,6 +173,20 @@ void LL_Init1msTick(uint32_t HCLKFrequency)
   /* Use frequency provided in argument */
   LL_InitTick(HCLKFrequency, 1000U);
 }
+//-------------------- Nouvelle fonction créee---------------------
+/**
+  * @brief  This function configures the Cortex-M SysTick source to have 10ms time base.
+  * @note   When a RTOS is used, it is recommended to avoid changing the Systick
+  *         configuration by calling this function, for a delay use rather osDelay RTOS service.
+  * @param  HCLKFrequency HCLK frequency in Hz
+  * @note   HCLK frequency can be calculated thanks to RCC helper macro or function @ref LL_RCC_GetSystemClocksFreq
+  * @retval None
+  */
+void LL_Init10msTick(uint32_t HCLKFrequency)
+{
+  /* Use frequency provided in argument */
+  LL_InitTick(HCLKFrequency, 10000U);
+}
 
 /**
   * @brief  This function provides accurate delay (in milliseconds) based

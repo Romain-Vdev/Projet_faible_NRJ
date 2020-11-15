@@ -46,8 +46,8 @@ Opti_uC.bin \
 all: Opti_uC.elf secondary-outputs
 
 # Tool invocations
-Opti_uC.elf: $(OBJS) $(USER_OBJS) C:\Users\romti\STM32CubeIDE\workspace_1.4.0\Opti_uC\STM32L476RGTX_FLASH.ld
-	arm-none-eabi-gcc -o "Opti_uC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\romti\STM32CubeIDE\workspace_1.4.0\Opti_uC\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Opti_uC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Opti_uC.elf: $(OBJS) $(USER_OBJS) /Users/emmadevaud/Desktop/Projet_faible_NRJ/STM32L476RGTX_FLASH.ld
+	arm-none-eabi-gcc -o "Opti_uC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/emmadevaud/Desktop/Projet_faible_NRJ/STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Opti_uC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
