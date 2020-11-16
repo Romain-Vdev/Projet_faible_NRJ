@@ -185,7 +185,7 @@ void LL_Init1msTick(uint32_t HCLKFrequency)
 void LL_Init10msTick(uint32_t HCLKFrequency)
 {
   /* Use frequency provided in argument */
-  LL_InitTick(HCLKFrequency, 10000U);
+  LL_InitTick(HCLKFrequency, 100U);
 }
 
 /**

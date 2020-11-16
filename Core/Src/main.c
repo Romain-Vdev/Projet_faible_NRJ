@@ -24,8 +24,9 @@
 {
 
 }*/
-int expe = 1  ;
+int expe=1;
 int bluemode=0;
+int passed=0;
 int counter=0; // compteur utilisé dans le handler Systick pour gérer la LED
 void Calibration_MSI_vs_LPE(void);
 void SystemClock_Config(void);
@@ -36,9 +37,13 @@ void RTC_Config(void);
 
 int main(void)
 {
-
-
-
+if(LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR1)==0){
+	LL_RTC_DisableWriteProtection(RTC);
+	LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0,1);
+	LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1,1);
+	LL_RTC_EnableWriteProtection(RTC);
+}
+expe = LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR0);
 // config GPIO
 GPIO_init();
 
@@ -188,8 +193,8 @@ if (expe!=2)
 /* Sysclk activation on the main PLL */
 LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
 LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
-	{ };
+//while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+	//{ };
 
 /* Set APB1 & APB2 prescaler*/
 LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
@@ -219,8 +224,7 @@ SystemCoreClockUpdate();
 
 
 void RTC_Config(void){
-
-	if (LL_RCC_LSE_IsReady()) { // cas du démarrage à chaud
+	if (((RCC->BDCR)&(RCC_BDCR_LSEON))==RCC_BDCR_LSEON) { // cas du démarrage à chaud
 		// le RTC est supposée déjà fonctionner, mais l'interface RTC-MPU n'est pas actif, il faut l'initialiser avant de tenter l'accés aux backup-registers
 		LL_APB1_GRP1_EnableClock( LL_APB1_GRP1_PERIPH_PWR );
 		LL_PWR_EnableBkUpAccess();
@@ -228,7 +232,7 @@ void RTC_Config(void){
 	}else { // cas du démarrage à froid
 		// démarre oscillateur LSE
 		LL_RCC_LSE_Enable();
-
+		expe=READ_BIT(RCC->BDCR, RCC_BDCR_LSEON);
 		// reset du back-up domain :
 		LL_RCC_ForceBackupDomainReset();
 		LL_RCC_ReleaseBackupDomainReset();
@@ -242,9 +246,6 @@ void RTC_Config(void){
 
 		// réactive la protection en écriture du registre RTC
 		LL_RTC_EnableWriteProtection(RTC);
-
-
-
 	}
 }
 
@@ -256,10 +257,10 @@ void RTC_Config(void){
 	{
 	  /* USER CODE BEGIN SysTick_IRQn 0 : gestion du clignotement de la LED 2 sec de période   (0,5 Hz de féquence) et 50ms*expe de durée active   */
 		counter ++ ;
-		if ((counter>0) &&  (counter<= 50*expe))
+		if ((counter>0) &&  (counter<= 5*expe))
 			LED_GREEN(1);
 
-		if ((counter> 50*expe) && (counter<200))
+		if ((counter> 5*expe) && (counter<200))
 			LED_GREEN(0);
 
 		if (counter>200)
@@ -268,8 +269,15 @@ void RTC_Config(void){
 	  /* USER CODE END SysTick_IRQn 0 */
 
 	  /* USER CODE BEGIN SysTick_IRQn 1 : détection de la transition repos-> pressé du bouton bleu*/
-		if (BLUE_BUTTON()) // à regarder si c'est bien la détection repos->pressé
+		if (BLUE_BUTTON() && !passed){ // à regarder si c'est bien la détection repos->pressé
 			bluemode=1;
+			expe++;
+			LL_RTC_DisableWriteProtection(RTC);
+			LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
+			LL_RTC_EnableWriteProtection(RTC);
+			passed=1;
+		}
+
 
 	  /* USER CODE END SysTick_IRQn 1 */
 
