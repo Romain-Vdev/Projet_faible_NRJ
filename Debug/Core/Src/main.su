@@ -28,4 +28,5 @@ main.c:37:5:main	8	static
 main.c:92:7:Calibration_MSI_vs_LPE	8	static
 main.c:119:6:SystemClock_Config	8	static
 main.c:164:6:SystemClock_Config_MSI_24Mhz	8	static
-main.c:221:6:RTC_Config	16	static
+main.c:221:6:RTC_Config	8	static
+main.c:255:7:SysTick_Handler	8	static
