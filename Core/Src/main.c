@@ -12,6 +12,8 @@
 #include "stm32l4xx_ll_gpio.h"
 #include "stm32l4xx_ll_pwr.h"
 #include "stm32l4xx_ll_rtc.h"
+#include "stm32l4xx_ll_cortex.h"
+#include "stm32l4xx_ll_exti.h"
 
 // #if defined(USE_FULL_ASSERT)
 // #include "stm32_assert.h"
@@ -26,7 +28,6 @@
 }*/
 int expe=1;
 int bluemode=0;
-int passed=0;
 int counter=0; // compteur utilisé dans le handler Systick pour gérer la LED
 void Calibration_MSI_vs_LPE(void);
 void SystemClock_Config(void);
@@ -37,54 +38,73 @@ void RTC_Config(void);
 
 int main(void)
 {
-if(LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR1)==0){
-	LL_RTC_DisableWriteProtection(RTC);
-	LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0,1);
-	LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1,1);
-	LL_RTC_EnableWriteProtection(RTC);
-}
-expe = LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR0);
-// config GPIO
-GPIO_init();
 
-// config RTC
-RTC_Config();
+	  // Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
+	  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
-// lecture de expe dans le backup register
+	  // config GPIO
+	  GPIO_init();
 
-/* Configure the system clock en fonction de expe qui défini Voltage Scaling and Flash Latency et utilisation de la PLL   */
-if (expe==1)
-	SystemClock_Config(); // fonction à appeler si expe == 1
-else
-	SystemClock_Config_MSI_24Mhz();
+	  // config RTC
+	  RTC_Config();
+
+	  // si j'appuie sur le bouton bleu et que je reset => je change d'expérience, expe s'incrémente
+	  if (BLUE_BUTTON()){ // à regarder si c'est bien la détection repos->pressé
+
+		  // je récupère la valeur de expe dans le backup register
+		  expe=LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR0);
+		  expe++;
+
+		  if (expe>8)
+       		expe=1;
+
+		 // stockage de la nouvelle valeur expe dans le backup register
+		LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
+
+	  }
 
 
-// Fonction qui active la calibration MSI vs LSE en fonction de expe
-Calibration_MSI_vs_LPE();
+
+	  /* Configure the system clock en fonction de expe qui défini Voltage Scaling and Flash Latency et utilisation de la PLL   */
+	  if (expe==1)
+		  SystemClock_Config(); // fonction à appeler si expe == 1
+	  else
+		  SystemClock_Config_MSI_24Mhz();
 
 
-// init systick timer (tick period at 10 ms)
-// le handler gère : la LED
-// 					repos/pressé du bouton bleu
-// 					action GPIO PC10
+	  // Fonction qui active la calibration MSI vs LSE en fonction de expe
+	 // Calibration_MSI_vs_LPE();
 
-// init systick timer (tick period at 1 ms)
-//LL_Init1msTick( SystemCoreClock );
 
-// init systick timer (tick period at 10 ms)
-LL_Init10msTick( SystemCoreClock );
 
-while (1)  {
-	if	( BLUE_BUTTON() )
-		LED_GREEN(1);
-	else {
-		LED_GREEN(0);
-		LL_mDelay(950);
-		LED_GREEN(1);
-		LL_mDelay(50);
-		}
-	}
-}
+	  // init systick timer (tick period at 10 ms)
+	  LL_Init10msTick( SystemCoreClock );
+
+	  while (1)  {
+
+		  if (bluemode==1){
+
+			  switch(expe)
+			  {
+
+			  	  case '1': LL_LPM_EnableSleep(); // MSI=4MHz | PLL=80Hz | V.Scaling=1 | F.Latency=4 | Calibration=OFF | Sleep=OFF->ON
+			  	  case '2': LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=1 | F.Latency=1 | Calibration=OFF->ON | Sleep=OFF
+			  	  case '3': LL_LPM_EnableSleep(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF | Sleep=OFF->ON
+			  	  case '4': LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF->ON | Sleep=OFF
+			  	 // case '5': // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP0, wakeup 20s
+			  	 // case '6': // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP1, wakeup 20s
+			  	 // case '7': // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP2, wakeup 20s
+			  	 // case '8': // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | SHUTDOWN, wakeup 20s
+
+
+			  }// end switch
+
+		  }// end if
+
+	  }// end while
+
+}// end main
 
 
 //----------------------------------------------------------------------
@@ -224,29 +244,63 @@ SystemCoreClockUpdate();
 
 
 void RTC_Config(void){
-	if (((RCC->BDCR)&(RCC_BDCR_LSEON))==RCC_BDCR_LSEON) { // cas du démarrage à chaud
-		// le RTC est supposée déjà fonctionner, mais l'interface RTC-MPU n'est pas actif, il faut l'initialiser avant de tenter l'accés aux backup-registers
-		LL_APB1_GRP1_EnableClock( LL_APB1_GRP1_PERIPH_PWR );
-		LL_PWR_EnableBkUpAccess();
+	if (LL_RCC_LSE_IsReady()!= 1){
+	//if (((RCC->BDCR)&(RCC_BDCR_LSEON))==RCC_BDCR_LSEON) { // cas du démarrage à chaud
+			// le RTC est supposée déjà fonctionner, mais l'interface RTC-MPU n'est pas actif, il faut l'initialiser avant de tenter l'accés aux backup-registers
+			LL_APB1_GRP1_EnableClock( LL_APB1_GRP1_PERIPH_PWR );
+			LL_PWR_EnableBkUpAccess();
 
-	}else { // cas du démarrage à froid
-		// démarre oscillateur LSE
-		LL_RCC_LSE_Enable();
-		expe=READ_BIT(RCC->BDCR, RCC_BDCR_LSEON);
-		// reset du back-up domain :
-		LL_RCC_ForceBackupDomainReset();
-		LL_RCC_ReleaseBackupDomainReset();
+		}else { // cas du démarrage à froid
 
-		// désactive la protection en écriture du registre RTC
-		LL_RTC_DisableWriteProtection(RTC);
+			//Alimente
+			LL_PWR_EnableBkUpAccess();
 
-		// set les 2 prescaler avec 1 valeur à changer ????
-		LL_RTC_SetAsynchPrescaler(RTC,1);
-		LL_RTC_SetSynchPrescaler(RTC,1);
+			// reset du back-up domain :
+			LL_RCC_ForceBackupDomainReset();
+			LL_RCC_ReleaseBackupDomainReset();
 
-		// réactive la protection en écriture du registre RTC
-		LL_RTC_EnableWriteProtection(RTC);
-	}
+			// ??
+			LL_RCC_LSE_SetDriveCapability(LL_RCC_LSEDRIVE_LOW);
+
+			// démarre oscillateur LSE
+			LL_RCC_LSE_Enable();
+
+			while(LL_RCC_LSE_IsReady() != 1);
+
+			//Set la clock du RCC sur LSE
+			LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
+
+			// Peripheral clock enable
+			LL_RCC_EnableRTC();
+
+			// désactive la protection en écriture du registre RTC
+			LL_RTC_DisableWriteProtection(RTC);
+
+			//Entrée dans le mode d'initialisation
+			if(!LL_RTC_EnterInitMode(RTC));
+
+			// set les 2 prescaler avec 1 valeur à changer ????
+			LL_RTC_SetAsynchPrescaler(RTC,128);
+			LL_RTC_SetSynchPrescaler(RTC,256);
+
+			//
+			LL_RTC_DisableInitMode(RTC);
+			while(LL_RTC_IsActiveFlag_INIT(RTC));
+
+			LL_RTC_ClearFlag_RS(RTC);
+			while(!LL_RTC_IsActiveFlag_RS(RTC));
+
+			// Démarre la clock RTC
+			//LL_RTC_EnableIT_TS(RTC);
+			//LL_RTC_TS_Enable(RTC);
+
+			// réactive la protection en écriture du registre RTC
+			LL_RTC_EnableWriteProtection(RTC);
+
+			// je stocke la variable expe au premier tour qui vaut 1
+			expe=1;
+			LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
+		}
 }
 
 //----------------------------------------------------------------------
@@ -269,13 +323,9 @@ void RTC_Config(void){
 	  /* USER CODE END SysTick_IRQn 0 */
 
 	  /* USER CODE BEGIN SysTick_IRQn 1 : détection de la transition repos-> pressé du bouton bleu*/
-		if (BLUE_BUTTON() && !passed){ // à regarder si c'est bien la détection repos->pressé
+		if (BLUE_BUTTON()){ // à regarder si c'est bien la détection repos->pressé
 			bluemode=1;
-			expe++;
-			LL_RTC_DisableWriteProtection(RTC);
-			LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
-			LL_RTC_EnableWriteProtection(RTC);
-			passed=1;
+
 		}
 
 
@@ -288,7 +338,57 @@ void RTC_Config(void){
 
 	}
 
+//----------------------------------------------------------------------
+	// partie commune a toutes les utilisations du wakeup timer
+	static void RTC_wakeup_init( int delay )
+	{
+	LL_RTC_DisableWriteProtection( RTC );
+	LL_RTC_WAKEUP_Disable( RTC );
+	while	( !LL_RTC_IsActiveFlag_WUTW( RTC ) )
+		{ }
+	// connecter le timer a l'horloge 1Hz de la RTC
+	LL_RTC_WAKEUP_SetClock( RTC, LL_RTC_WAKEUPCLOCK_CKSPRE );
+	// fixer la duree de temporisation
+	LL_RTC_WAKEUP_SetAutoReload( RTC, delay );	// 16 bits
+	LL_RTC_ClearFlag_WUT(RTC);
+	LL_RTC_EnableIT_WUT(RTC);
+	LL_RTC_WAKEUP_Enable(RTC);
+	LL_RTC_EnableWriteProtection(RTC);
+	}
 
+//----------------------------------------------------------------------
+	// Dans le cas des modes STANDBY et SHUTDOWN, le MPU sera reveille par reset
+	// causé par 1 wakeup line (interne ou externe) (le NVIC n'est plus alimenté)
+	// delay se configure en seconde à condition que l'horloge du wake up timer soit à 1Hz comme la RTC
+	void RTC_wakeup_init_from_standby_or_shutdown( int delay )
+	{
+	RTC_wakeup_init( delay );
+	// enable the Internal Wake-up line
+	LL_PWR_EnableInternWU();	// ceci ne concerne que Standby et Shutdown, pas STOPx
+	}
 
+	// Dans le cas des modes STOPx, le MPU sera reveille par interruption
+	// le module EXTI et une partie du NVIC sont encore alimentes
+	// le contenu de la RAM et des registres étant préservé, le MPU
+	// reprend l'execution après l'instruction WFI
+
+//----------------------------------------------------------------------
+	void RTC_wakeup_init_from_stop( int delay )
+	{
+	RTC_wakeup_init( delay );
+	// valider l'interrupt par la ligne 20 du module EXTI, qui est réservée au wakeup timer
+	LL_EXTI_EnableIT_0_31( LL_EXTI_LINE_20 );
+	LL_EXTI_EnableRisingTrig_0_31( LL_EXTI_LINE_20 );
+	// valider l'interrupt chez NVIC
+	NVIC_SetPriority( RTC_WKUP_IRQn, 1 );
+	NVIC_EnableIRQ( RTC_WKUP_IRQn );
+	}
+
+//----------------------------------------------------------------------
+	// wakeup timer interrupt Handler (inutile mais doit etre defini)
+	void RTC_WKUP_IRQHandler()
+	{
+	LL_EXTI_ClearFlag_0_31( LL_EXTI_LINE_20 );
+	}
 
 
