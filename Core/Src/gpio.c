@@ -7,8 +7,9 @@
 
 #define LED_PORT GPIOA
 #define LED_PIN LL_GPIO_PIN_5
-#define BUT_PORT GPIOC
+//#define BUT_PORT GPIOC
 #define BUT_PIN LL_GPIO_PIN_13
+#define PWM_PIN LL_GPIO_PIN_10
 
 void GPIO_init(void)
 {
@@ -21,7 +22,11 @@ LL_GPIO_SetPinOutputType( LED_PORT, LED_PIN, LL_GPIO_OUTPUT_PUSHPULL );
 // PORT C
 LL_AHB2_GRP1_EnableClock( LL_AHB2_GRP1_PERIPH_GPIOC );
 // Blue button - PC13
-LL_GPIO_SetPinMode( BUT_PORT, BUT_PIN, LL_GPIO_MODE_INPUT );
+LL_GPIO_SetPinMode( GPIOC, BUT_PIN, LL_GPIO_MODE_INPUT );
+// Sortie PWM 50 Hz
+LL_GPIO_SetPinMode(GPIOC, PWM_PIN, LL_GPIO_MODE_OUTPUT);
+LL_GPIO_SetPinOutputType( GPIOC, PWM_PIN, LL_GPIO_OUTPUT_PUSHPULL );
+
 }
 
 
@@ -34,8 +39,18 @@ else	LL_GPIO_ResetOutputPin( LED_PORT, LED_PIN );
 
 int BLUE_BUTTON()
 {
-return ( !LL_GPIO_IsInputPinSet( BUT_PORT, BUT_PIN ) );
+return ( !LL_GPIO_IsInputPinSet( GPIOC, BUT_PIN ) );
 }
+
+void PWM_50Hz(int val)
+{
+	if	( val )
+		LL_GPIO_SetOutputPin(  GPIOC, PWM_PIN );
+	else	LL_GPIO_ResetOutputPin(GPIOC, PWM_PIN );
+
+}
+
+
 
 
 
