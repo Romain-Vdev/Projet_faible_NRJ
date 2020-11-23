@@ -50,7 +50,7 @@ int main(void)
 	  // config GPIO
 	  GPIO_init();
 
-	  // config RTC
+	  // config RTC pour que la fréquence soit à 1Hz
 	  RTC_Config();
 
 	  // si j'appuie sur le bouton bleu et que je reset => je change d'expérience, expe s'incrémente
@@ -67,7 +67,7 @@ int main(void)
 		LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
 
 	  }else
-
+		  // on récupère la valeur de expe
 		  expe=LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR0);
 
 
@@ -86,6 +86,7 @@ int main(void)
 	  // init systick timer (tick period at 10 ms)
 	  LL_Init10msTick( SystemCoreClock );
 
+
 	  while (1)  {
 
 		  if (bluemode==1){
@@ -97,35 +98,61 @@ int main(void)
 			  {
 
 			  	 case 1:
-			  		 LL_LPM_EnableSleep();// MSI=4MHz | PLL=80Hz | V.Scaling=1 | F.Latency=4 | Calibration=OFF | Sleep=OFF->ON
-			  		 __WFI();
-
-			  	 break;
+			  		 	 LL_LPM_EnableSleep();// MSI=4MHz | PLL=80Hz | V.Scaling=1 | F.Latency=4 | Calibration=OFF | Sleep=OFF->ON
+			  		 	 __WFI();
+			  		 	 break;
 
 			  	 case 2:
-			  		 LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=1 | F.Latency=1 | Calibration=OFF->ON | Sleep=OFF
-			  	break ;
+			  		 	 LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=1 | F.Latency=1 | Calibration=OFF->ON | Sleep=OFF
+			  		 	 break ;
 
 			  	 case 3:
-			  		 LL_LPM_EnableSleep(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF | Sleep=OFF->ON
-			  		 __WFI();
+			  		 	 LL_LPM_EnableSleep(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF | Sleep=OFF->ON
+			  		 	 __WFI();
+			  		 	 break ;
 
-			  	break ;
 			  	 case 4:
-			  		 LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF->ON | Sleep=OFF
-			  	break ;
-			  	case 5:
-			  			//Init_Low_Power_Mode(LL_PWR_MODE_STOP1);
-			  		    //Set_Low_Power_Mode(LL_PWR_MODE_STOP1);
-			  			LL_PWR_SetPowerMode(LL_PWR_MODE_STOP2);
-			  			LL_LPM_EnableDeepSleep();
-			  			RTC_wakeup_init_from_stop(10);
+			  		 	 LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF->ON | Sleep=OFF
+			  		 	 break ;
+
+			  	case 5: // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP0, wakeup 20s
+
+			  			Init_Low_Power_Mode(LL_PWR_MODE_STOP0); // Set the wake up timer to 10 sec
+			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP0);
 			  			__WFI();
-			  			//LL_LPM_EnableSleep();
 			  			bluemode=0;
+			  			SystemClock_Config_MSI_24Mhz();
+			  			LL_Init10msTick( SystemCoreClock );
+			  			LL_RCC_MSI_EnablePLLMode();
+
 			  			break;
 
-			  	case 6:
+				case 6: // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP0, wakeup 20s
+
+						Init_Low_Power_Mode(LL_PWR_MODE_STOP1); // Set the wake up timer to 10 sec
+			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP1);
+			  			__WFI();
+			  			bluemode=0;
+						SystemClock_Config_MSI_24Mhz();
+						LL_Init10msTick( SystemCoreClock );
+						LL_RCC_MSI_EnablePLLMode();
+
+						break;
+
+				case 7: // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration= ON | Sleep= ON | STOP0, wakeup 20s
+
+						Init_Low_Power_Mode(LL_PWR_MODE_STOP2); // Set the wake up timer to 10 sec
+						Set_Low_Power_Mode(LL_PWR_MODE_STOP2);
+						__WFI();
+						bluemode=0;
+						// On remet les configurations car le STOPMODE se réveille ici
+						SystemClock_Config_MSI_24Mhz();
+						LL_Init10msTick( SystemCoreClock );
+						LL_RCC_MSI_EnablePLLMode();
+
+						break;
+
+			  	case 8:
 			  			Init_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
 			  		    Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
 			  		    __WFI();
@@ -145,7 +172,7 @@ int main(void)
 			   }// end switch
 
 		  }
-		  else {
+		  else { // pour les expériences 5 à 8 le sleepmode est le mode normal de fonctionnement
 			  if(expe>4){
 
 				  LL_LPM_EnableSleep();
@@ -318,7 +345,7 @@ void RTC_Config(void){
 			LL_RCC_ForceBackupDomainReset();
 			LL_RCC_ReleaseBackupDomainReset();
 
-			// ??
+
 			LL_RCC_LSE_SetDriveCapability(LL_RCC_LSEDRIVE_LOW);
 
 			// démarre oscillateur LSE
@@ -472,11 +499,14 @@ void RTC_WKUP_IRQHandler()
 void Init_Low_Power_Mode(uint32_t LowPowerMode){
 
 	if ((LowPowerMode == LL_PWR_MODE_STOP0) || (LowPowerMode == LL_PWR_MODE_STOP1) || (LowPowerMode == LL_PWR_MODE_STOP2)){
-		RTC_wakeup_init_from_stop(1000);
+		RTC_wakeup_init_from_stop(20);
+		// Disable le timer systick
+		SysTick->CTRL=0;
+
 	}
 
 	if ((LowPowerMode == LL_PWR_MODE_STANDBY) || (LowPowerMode == LL_PWR_MODE_SHUTDOWN)){
-			RTC_wakeup_init_from_standby_or_shutdown(10);
+			RTC_wakeup_init_from_standby_or_shutdown(20);
 		}
 
 
@@ -485,10 +515,12 @@ void Init_Low_Power_Mode(uint32_t LowPowerMode){
 
 void Set_Low_Power_Mode(uint32_t LowPowerMode){
 	// Activate the low power mode desired
-	// Set LPMS in the PWR_CR1 register
-		LL_PWR_SetPowerMode(LowPowerMode);
+
 	// set the SLEEPDEEP bit
 		LL_LPM_EnableDeepSleep();
+	// Set LPMS in the PWR_CR1 register
+		LL_PWR_SetPowerMode(LowPowerMode);
+
 
 
 
