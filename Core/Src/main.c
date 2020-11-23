@@ -90,17 +90,6 @@ int main(void)
 
 		  if (bluemode==1){
 
-			  //if ((expe==1) || (expe==3))
-				  //LL_LPM_EnableSleep();
-			  	  // if expe = 1 :  MSI=4MHz | PLL=80Hz | V.Scaling=1 | F.Latency=4 | Calibration=OFF | Sleep=OFF->ON
-			 	  // if expe = 3 :  MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF | Sleep=OFF->ON
-
-			  //if ((expe==2) || (expe==4))
-				//  LL_RCC_MSI_EnablePLLMode();
-			  	  // if expe = 2 :  MSI=24MHz | PLL=OFF | V.Scaling=1 | F.Latency=1 | Calibration=OFF->ON | Sleep=OFF
-			  	  // if expe = 4 :  MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF->ON | Sleep=OFF
-
-
 
 
 
@@ -110,7 +99,7 @@ int main(void)
 			  	 case 1:
 			  		 LL_LPM_EnableSleep();// MSI=4MHz | PLL=80Hz | V.Scaling=1 | F.Latency=4 | Calibration=OFF | Sleep=OFF->ON
 			  		 __WFI();
-			  		 // bluemode=0;
+
 			  	 break;
 
 			  	 case 2:
@@ -120,24 +109,28 @@ int main(void)
 			  	 case 3:
 			  		 LL_LPM_EnableSleep(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF | Sleep=OFF->ON
 			  		 __WFI();
-			  		//bluemode=0;
+
 			  	break ;
 			  	 case 4:
 			  		 LL_RCC_MSI_EnablePLLMode(); // MSI=24MHz | PLL=OFF | V.Scaling=2 | F.Latency=3 | Calibration=OFF->ON | Sleep=OFF
 			  	break ;
-			  	case 5: //Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  			Init_Low_Power_Mode(LL_PWR_MODE_STOP0);
-			  		    Set_Low_Power_Mode(LL_PWR_MODE_STOP0);
+			  	case 5:
+			  			//Init_Low_Power_Mode(LL_PWR_MODE_STOP1);
+			  		    //Set_Low_Power_Mode(LL_PWR_MODE_STOP1);
+			  			LL_PWR_SetPowerMode(LL_PWR_MODE_STOP2);
+			  			LL_LPM_EnableDeepSleep();
+			  			RTC_wakeup_init_from_stop(10);
 			  			__WFI();
+			  			//LL_LPM_EnableSleep();
 			  			bluemode=0;
 			  			break;
 
-			  	case 6: //Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  			Init_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  		    Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  			__WFI();
-			  				  			//bluemode=0;
-			  				  			break;
+			  	case 6:
+			  			Init_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
+			  		    Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
+			  		    __WFI();
+			  			bluemode=0;
+			  			break;
 
 			  	 default:
 			  		 break ;
@@ -151,6 +144,14 @@ int main(void)
 
 			   }// end switch
 
+		  }
+		  else {
+			  if(expe>4){
+
+				  LL_LPM_EnableSleep();
+				  __WFI();
+
+			  }
 		  }// end if
 
 	  }// end while
@@ -338,8 +339,8 @@ void RTC_Config(void){
 			if(!LL_RTC_EnterInitMode(RTC));
 
 			// set les 2 prescaler avec 1 valeur à changer ????
-			LL_RTC_SetAsynchPrescaler(RTC,128);
-			LL_RTC_SetSynchPrescaler(RTC,256);
+			LL_RTC_SetAsynchPrescaler(RTC,127);
+			LL_RTC_SetSynchPrescaler(RTC,257);
 
 			//
 			LL_RTC_DisableInitMode(RTC);
@@ -439,6 +440,7 @@ void RTC_wakeup_init_from_standby_or_shutdown( int delay )
 void RTC_wakeup_init_from_stop( int delay )
 	{
 	RTC_wakeup_init( delay );
+	//EXTI->PR1&=~(1<<22);
 	// valider l'interrupt par la ligne 20 du module EXTI, qui est réservée au wakeup timer
 	LL_EXTI_EnableIT_0_31( LL_EXTI_LINE_20 );
 	LL_EXTI_EnableRisingTrig_0_31( LL_EXTI_LINE_20 );
@@ -452,7 +454,7 @@ void RTC_wakeup_init_from_stop( int delay )
 void RTC_WKUP_IRQHandler()
 	{
 	LL_EXTI_ClearFlag_0_31( LL_EXTI_LINE_20 );
-	//bluemode=0;
+
 	}
 
 //----------------------------------------------------------------------
@@ -470,7 +472,7 @@ void RTC_WKUP_IRQHandler()
 void Init_Low_Power_Mode(uint32_t LowPowerMode){
 
 	if ((LowPowerMode == LL_PWR_MODE_STOP0) || (LowPowerMode == LL_PWR_MODE_STOP1) || (LowPowerMode == LL_PWR_MODE_STOP2)){
-		RTC_wakeup_init_from_stop(10);
+		RTC_wakeup_init_from_stop(1000);
 	}
 
 	if ((LowPowerMode == LL_PWR_MODE_STANDBY) || (LowPowerMode == LL_PWR_MODE_SHUTDOWN)){
@@ -483,10 +485,11 @@ void Init_Low_Power_Mode(uint32_t LowPowerMode){
 
 void Set_Low_Power_Mode(uint32_t LowPowerMode){
 	// Activate the low power mode desired
-		// set the SLEEPDEEP bit
-		LL_LPM_EnableDeepSleep();
-		// Set LPMS in the PWR_CR1 register
+	// Set LPMS in the PWR_CR1 register
 		LL_PWR_SetPowerMode(LowPowerMode);
+	// set the SLEEPDEEP bit
+		LL_LPM_EnableDeepSleep();
+
 
 
 }
