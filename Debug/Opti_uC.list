@@ -2102,7 +2102,6 @@ int main(void)
 			  			Init_Low_Power_Mode(LL_PWR_MODE_STOP0); // Set the wake up timer to 10 sec
  8000cf4:	2000      	movs	r0, #0
  8000cf6:	f000 f9d9 	bl	80010ac <Init_Low_Power_Mode>
-			  			//SysTick->CTRL=0;
 			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP0);
  8000cfa:	2000      	movs	r0, #0
  8000cfc:	f000 f9f8 	bl	80010f0 <Set_Low_Power_Mode>
@@ -2130,7 +2129,6 @@ int main(void)
 						Init_Low_Power_Mode(LL_PWR_MODE_STOP1); // Set the wake up timer to 10 sec
  8000d1c:	2001      	movs	r0, #1
  8000d1e:	f000 f9c5 	bl	80010ac <Init_Low_Power_Mode>
-			  			//SysTick->CTRL=0;
 			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP1);
  8000d22:	2001      	movs	r0, #1
  8000d24:	f000 f9e4 	bl	80010f0 <Set_Low_Power_Mode>
@@ -2158,7 +2156,6 @@ int main(void)
 						Init_Low_Power_Mode(LL_PWR_MODE_STOP2); // Set the wake up timer to 10 sec
  8000d44:	2002      	movs	r0, #2
  8000d46:	f000 f9b1 	bl	80010ac <Init_Low_Power_Mode>
-						//SysTick->CTRL=0; // Disable le systick
 						Set_Low_Power_Mode(LL_PWR_MODE_STOP2);
  8000d4a:	2002      	movs	r0, #2
  8000d4c:	f000 f9d0 	bl	80010f0 <Set_Low_Power_Mode>
