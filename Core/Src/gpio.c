@@ -16,8 +16,11 @@ void GPIO_init(void)
 // PORT A
 LL_AHB2_GRP1_EnableClock( LL_AHB2_GRP1_PERIPH_GPIOA );
 // Green LED (user LED) - PA5
-LL_GPIO_SetPinMode(       LED_PORT, LED_PIN, LL_GPIO_MODE_OUTPUT );
+LL_GPIO_SetPinMode(LED_PORT, LED_PIN, LL_GPIO_MODE_OUTPUT );
 LL_GPIO_SetPinOutputType( LED_PORT, LED_PIN, LL_GPIO_OUTPUT_PUSHPULL );
+
+// Blue button - PA0
+LL_GPIO_SetPinMode( GPIOA, LL_GPIO_PIN_0, LL_GPIO_MODE_INPUT );
 
 // PORT C
 LL_AHB2_GRP1_EnableClock( LL_AHB2_GRP1_PERIPH_GPIOC );
@@ -39,7 +42,8 @@ else	LL_GPIO_ResetOutputPin( LED_PORT, LED_PIN );
 
 int BLUE_BUTTON()
 {
-return ( !LL_GPIO_IsInputPinSet( GPIOC, BUT_PIN ) );
+//return ( !LL_GPIO_IsInputPinSet( GPIOC, BUT_PIN ) );
+return ( !LL_GPIO_IsInputPinSet( GPIOA, LL_GPIO_PIN_0) );
 }
 
 void PWM_50Hz(int val)

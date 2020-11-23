@@ -66,10 +66,10 @@ int main(void)
 		 // stockage de la nouvelle valeur expe dans le backup register
 		LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
 
-	  }else
-
+	  }else{
+		  //LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR0, expe);
 		  expe=LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR0);
-
+	  }
 
 	  /* Configure the system clock en fonction de expe qui défini Voltage Scaling and Flash Latency et utilisation de la PLL   */
 	  if (expe==1)
@@ -132,12 +132,26 @@ int main(void)
 			  			bluemode=0;
 			  			break;
 
-			  	case 6: //Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  			Init_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  		    Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
-			  				  			__WFI();
-			  				  			//bluemode=0;
-			  				  			break;
+			  	case 6:
+			  			Init_Low_Power_Mode(LL_PWR_MODE_STOP1);
+			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP1);
+			  			__WFI();
+			  			bluemode=0;
+			  			break;
+
+			  	case 7:
+			  			Init_Low_Power_Mode(LL_PWR_MODE_STOP2);
+			  			Set_Low_Power_Mode(LL_PWR_MODE_STOP2);
+			  			__WFI();
+			  			bluemode=0;
+			  			break;
+
+			  	//case 8:
+			  	//		Init_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
+			  	//		Set_Low_Power_Mode(LL_PWR_MODE_SHUTDOWN);
+			  	//		__WFI();
+			  	//		bluemode=0;
+			  	//		break;
 
 			  	 default:
 			  		 break ;
@@ -302,6 +316,8 @@ SystemCoreClockUpdate();
 
 
 void RTC_Config(void){
+
+	//LL_RCC_LSE_Disable();
 	if (LL_RCC_LSE_IsReady()== 1){
 	//if (((RCC->BDCR)&(RCC_BDCR_LSEON))==RCC_BDCR_LSEON) { // cas du démarrage à chaud
 			// le RTC est supposée déjà fonctionner, mais l'interface RTC-MPU n'est pas actif, il faut l'initialiser avant de tenter l'accés aux backup-registers
@@ -338,8 +354,9 @@ void RTC_Config(void){
 			if(!LL_RTC_EnterInitMode(RTC));
 
 			// set les 2 prescaler avec 1 valeur à changer ????
-			LL_RTC_SetAsynchPrescaler(RTC,128);
-			LL_RTC_SetSynchPrescaler(RTC,256);
+
+			LL_RTC_SetSynchPrescaler(RTC,257);
+			LL_RTC_SetAsynchPrescaler(RTC,127);
 
 			//
 			LL_RTC_DisableInitMode(RTC);

@@ -909,7 +909,7 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x0000000008000000                g_pfnVectors
                 0x0000000008000188                . = ALIGN (0x4)
 
-.text           0x0000000008000188     0x12f0
+.text           0x0000000008000188     0x1318
                 0x0000000008000188                . = ALIGN (0x4)
  *(.text)
  .text          0x0000000008000188       0x40 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
@@ -927,374 +927,375 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .text.LL_GPIO_ResetOutputPin
                 0x00000000080002e8       0x1c Core/Src/gpio.o
  .text.GPIO_init
-                0x0000000008000304       0x54 Core/Src/gpio.o
+                0x0000000008000304       0x60 Core/Src/gpio.o
                 0x0000000008000304                GPIO_init
  .text.LED_GREEN
-                0x0000000008000358       0x2c Core/Src/gpio.o
-                0x0000000008000358                LED_GREEN
+                0x0000000008000364       0x2c Core/Src/gpio.o
+                0x0000000008000364                LED_GREEN
  .text.BLUE_BUTTON
-                0x0000000008000384       0x24 Core/Src/gpio.o
-                0x0000000008000384                BLUE_BUTTON
+                0x0000000008000390       0x1e Core/Src/gpio.o
+                0x0000000008000390                BLUE_BUTTON
+ *fill*         0x00000000080003ae        0x2 
  .text.PWM_50Hz
-                0x00000000080003a8       0x30 Core/Src/gpio.o
-                0x00000000080003a8                PWM_50Hz
+                0x00000000080003b0       0x30 Core/Src/gpio.o
+                0x00000000080003b0                PWM_50Hz
  .text.__NVIC_EnableIRQ
-                0x00000000080003d8       0x3c Core/Src/main.o
+                0x00000000080003e0       0x3c Core/Src/main.o
  .text.__NVIC_SetPriority
-                0x0000000008000414       0x54 Core/Src/main.o
+                0x000000000800041c       0x54 Core/Src/main.o
  .text.LL_APB1_GRP1_EnableClock
-                0x0000000008000468       0x30 Core/Src/main.o
+                0x0000000008000470       0x30 Core/Src/main.o
  .text.LL_APB2_GRP1_EnableClock
-                0x0000000008000498       0x30 Core/Src/main.o
+                0x00000000080004a0       0x30 Core/Src/main.o
  .text.LL_RCC_LSE_Enable
-                0x00000000080004c8       0x24 Core/Src/main.o
+                0x00000000080004d0       0x24 Core/Src/main.o
  .text.LL_RCC_LSE_SetDriveCapability
-                0x00000000080004ec       0x2c Core/Src/main.o
+                0x00000000080004f4       0x2c Core/Src/main.o
  .text.LL_RCC_LSE_IsReady
-                0x0000000008000518       0x28 Core/Src/main.o
+                0x0000000008000520       0x28 Core/Src/main.o
  .text.LL_RCC_MSI_Enable
-                0x0000000008000540       0x20 Core/Src/main.o
+                0x0000000008000548       0x20 Core/Src/main.o
  .text.LL_RCC_MSI_IsReady
-                0x0000000008000560       0x24 Core/Src/main.o
+                0x0000000008000568       0x24 Core/Src/main.o
  .text.LL_RCC_MSI_EnablePLLMode
-                0x0000000008000584       0x20 Core/Src/main.o
+                0x000000000800058c       0x20 Core/Src/main.o
  .text.LL_RCC_MSI_EnableRangeSelection
-                0x00000000080005a4       0x20 Core/Src/main.o
+                0x00000000080005ac       0x20 Core/Src/main.o
  .text.LL_RCC_MSI_IsEnabledRangeSelect
-                0x00000000080005c4       0x24 Core/Src/main.o
+                0x00000000080005cc       0x24 Core/Src/main.o
  .text.LL_RCC_MSI_SetRange
-                0x00000000080005e8       0x28 Core/Src/main.o
+                0x00000000080005f0       0x28 Core/Src/main.o
  .text.LL_RCC_SetSysClkSource
-                0x0000000008000610       0x28 Core/Src/main.o
+                0x0000000008000618       0x28 Core/Src/main.o
  .text.LL_RCC_GetSysClkSource
-                0x0000000008000638       0x1c Core/Src/main.o
+                0x0000000008000640       0x1c Core/Src/main.o
  .text.LL_RCC_SetAHBPrescaler
-                0x0000000008000654       0x28 Core/Src/main.o
+                0x000000000800065c       0x28 Core/Src/main.o
  .text.LL_RCC_SetAPB1Prescaler
-                0x000000000800067c       0x28 Core/Src/main.o
+                0x0000000008000684       0x28 Core/Src/main.o
  .text.LL_RCC_SetAPB2Prescaler
-                0x00000000080006a4       0x28 Core/Src/main.o
+                0x00000000080006ac       0x28 Core/Src/main.o
  .text.LL_RCC_SetRTCClockSource
-                0x00000000080006cc       0x2c Core/Src/main.o
+                0x00000000080006d4       0x2c Core/Src/main.o
  .text.LL_RCC_EnableRTC
-                0x00000000080006f8       0x24 Core/Src/main.o
+                0x0000000008000700       0x24 Core/Src/main.o
  .text.LL_RCC_ForceBackupDomainReset
-                0x000000000800071c       0x24 Core/Src/main.o
+                0x0000000008000724       0x24 Core/Src/main.o
  .text.LL_RCC_ReleaseBackupDomainReset
-                0x0000000008000740       0x24 Core/Src/main.o
+                0x0000000008000748       0x24 Core/Src/main.o
  .text.LL_RCC_PLL_Enable
-                0x0000000008000764       0x20 Core/Src/main.o
+                0x000000000800076c       0x20 Core/Src/main.o
  .text.LL_RCC_PLL_Disable
-                0x0000000008000784       0x20 Core/Src/main.o
+                0x000000000800078c       0x20 Core/Src/main.o
  .text.LL_RCC_PLL_IsReady
-                0x00000000080007a4       0x28 Core/Src/main.o
+                0x00000000080007ac       0x28 Core/Src/main.o
  .text.LL_RCC_PLL_ConfigDomain_SYS
-                0x00000000080007cc       0x40 Core/Src/main.o
+                0x00000000080007d4       0x40 Core/Src/main.o
  .text.LL_RCC_PLL_EnableDomain_SYS
-                0x000000000800080c       0x20 Core/Src/main.o
+                0x0000000008000814       0x20 Core/Src/main.o
  .text.LL_RCC_PLL_DisableDomain_SYS
-                0x000000000800082c       0x20 Core/Src/main.o
+                0x0000000008000834       0x20 Core/Src/main.o
  .text.LL_FLASH_SetLatency
-                0x000000000800084c       0x28 Core/Src/main.o
+                0x0000000008000854       0x28 Core/Src/main.o
  .text.LL_PWR_SetRegulVoltageScaling
-                0x0000000008000874       0x28 Core/Src/main.o
+                0x000000000800087c       0x28 Core/Src/main.o
  .text.LL_PWR_EnableBkUpAccess
-                0x000000000800089c       0x20 Core/Src/main.o
+                0x00000000080008a4       0x20 Core/Src/main.o
  .text.LL_PWR_SetPowerMode
-                0x00000000080008bc       0x28 Core/Src/main.o
+                0x00000000080008c4       0x28 Core/Src/main.o
  .text.LL_PWR_EnableInternWU
-                0x00000000080008e4       0x20 Core/Src/main.o
+                0x00000000080008ec       0x20 Core/Src/main.o
  .text.LL_RTC_DisableInitMode
-                0x0000000008000904       0x1c Core/Src/main.o
+                0x000000000800090c       0x1c Core/Src/main.o
  .text.LL_RTC_SetAsynchPrescaler
-                0x0000000008000920       0x28 Core/Src/main.o
+                0x0000000008000928       0x28 Core/Src/main.o
  .text.LL_RTC_SetSynchPrescaler
-                0x0000000008000948       0x2a Core/Src/main.o
+                0x0000000008000950       0x2a Core/Src/main.o
  .text.LL_RTC_EnableWriteProtection
-                0x0000000008000972       0x1a Core/Src/main.o
+                0x000000000800097a       0x1a Core/Src/main.o
  .text.LL_RTC_DisableWriteProtection
-                0x000000000800098c       0x20 Core/Src/main.o
+                0x0000000008000994       0x20 Core/Src/main.o
  .text.LL_RTC_WAKEUP_Enable
-                0x00000000080009ac       0x20 Core/Src/main.o
+                0x00000000080009b4       0x20 Core/Src/main.o
  .text.LL_RTC_WAKEUP_Disable
-                0x00000000080009cc       0x20 Core/Src/main.o
+                0x00000000080009d4       0x20 Core/Src/main.o
  .text.LL_RTC_WAKEUP_SetClock
-                0x00000000080009ec       0x26 Core/Src/main.o
+                0x00000000080009f4       0x26 Core/Src/main.o
  .text.LL_RTC_WAKEUP_SetAutoReload
-                0x0000000008000a12       0x26 Core/Src/main.o
+                0x0000000008000a1a       0x26 Core/Src/main.o
  .text.LL_RTC_BAK_SetRegister
-                0x0000000008000a38       0x32 Core/Src/main.o
+                0x0000000008000a40       0x32 Core/Src/main.o
  .text.LL_RTC_BAK_GetRegister
-                0x0000000008000a6a       0x2e Core/Src/main.o
+                0x0000000008000a72       0x2e Core/Src/main.o
  .text.LL_RTC_ClearFlag_WUT
-                0x0000000008000a98       0x22 Core/Src/main.o
+                0x0000000008000aa0       0x22 Core/Src/main.o
  .text.LL_RTC_IsActiveFlag_INIT
-                0x0000000008000aba       0x26 Core/Src/main.o
+                0x0000000008000ac2       0x26 Core/Src/main.o
  .text.LL_RTC_IsActiveFlag_RS
-                0x0000000008000ae0       0x26 Core/Src/main.o
+                0x0000000008000ae8       0x26 Core/Src/main.o
  .text.LL_RTC_ClearFlag_RS
-                0x0000000008000b06       0x24 Core/Src/main.o
+                0x0000000008000b0e       0x24 Core/Src/main.o
  .text.LL_RTC_IsActiveFlag_WUTW
-                0x0000000008000b2a       0x26 Core/Src/main.o
+                0x0000000008000b32       0x26 Core/Src/main.o
  .text.LL_RTC_EnableIT_WUT
-                0x0000000008000b50       0x20 Core/Src/main.o
+                0x0000000008000b58       0x20 Core/Src/main.o
  .text.LL_LPM_EnableSleep
-                0x0000000008000b70       0x20 Core/Src/main.o
+                0x0000000008000b78       0x20 Core/Src/main.o
  .text.LL_LPM_EnableDeepSleep
-                0x0000000008000b90       0x20 Core/Src/main.o
+                0x0000000008000b98       0x20 Core/Src/main.o
  .text.LL_EXTI_EnableIT_0_31
-                0x0000000008000bb0       0x24 Core/Src/main.o
+                0x0000000008000bb8       0x24 Core/Src/main.o
  .text.LL_EXTI_EnableRisingTrig_0_31
-                0x0000000008000bd4       0x24 Core/Src/main.o
+                0x0000000008000bdc       0x24 Core/Src/main.o
  .text.LL_EXTI_ClearFlag_0_31
-                0x0000000008000bf8       0x20 Core/Src/main.o
- .text.main     0x0000000008000c18      0x118 Core/Src/main.o
-                0x0000000008000c18                main
+                0x0000000008000c00       0x20 Core/Src/main.o
+ .text.main     0x0000000008000c20      0x138 Core/Src/main.o
+                0x0000000008000c20                main
  .text.Calibration_MSI_vs_LPE
-                0x0000000008000d30       0x18 Core/Src/main.o
-                0x0000000008000d30                Calibration_MSI_vs_LPE
+                0x0000000008000d58       0x18 Core/Src/main.o
+                0x0000000008000d58                Calibration_MSI_vs_LPE
  .text.SystemClock_Config
-                0x0000000008000d48       0x66 Core/Src/main.o
-                0x0000000008000d48                SystemClock_Config
- *fill*         0x0000000008000dae        0x2 
+                0x0000000008000d70       0x66 Core/Src/main.o
+                0x0000000008000d70                SystemClock_Config
+ *fill*         0x0000000008000dd6        0x2 
  .text.SystemClock_Config_MSI_24Mhz
-                0x0000000008000db0       0x7c Core/Src/main.o
-                0x0000000008000db0                SystemClock_Config_MSI_24Mhz
+                0x0000000008000dd8       0x7c Core/Src/main.o
+                0x0000000008000dd8                SystemClock_Config_MSI_24Mhz
  .text.RTC_Config
-                0x0000000008000e2c       0xb8 Core/Src/main.o
-                0x0000000008000e2c                RTC_Config
+                0x0000000008000e54       0xb8 Core/Src/main.o
+                0x0000000008000e54                RTC_Config
  .text.SysTick_Handler
-                0x0000000008000ee4       0x98 Core/Src/main.o
-                0x0000000008000ee4                SysTick_Handler
+                0x0000000008000f0c       0x98 Core/Src/main.o
+                0x0000000008000f0c                SysTick_Handler
  .text.RTC_wakeup_init
-                0x0000000008000f7c       0x58 Core/Src/main.o
+                0x0000000008000fa4       0x58 Core/Src/main.o
  .text.RTC_wakeup_init_from_standby_or_shutdown
-                0x0000000008000fd4       0x1a Core/Src/main.o
-                0x0000000008000fd4                RTC_wakeup_init_from_standby_or_shutdown
+                0x0000000008000ffc       0x1a Core/Src/main.o
+                0x0000000008000ffc                RTC_wakeup_init_from_standby_or_shutdown
  .text.RTC_wakeup_init_from_stop
-                0x0000000008000fee       0x34 Core/Src/main.o
-                0x0000000008000fee                RTC_wakeup_init_from_stop
+                0x0000000008001016       0x34 Core/Src/main.o
+                0x0000000008001016                RTC_wakeup_init_from_stop
  .text.RTC_WKUP_IRQHandler
-                0x0000000008001022       0x10 Core/Src/main.o
-                0x0000000008001022                RTC_WKUP_IRQHandler
+                0x000000000800104a       0x10 Core/Src/main.o
+                0x000000000800104a                RTC_WKUP_IRQHandler
  .text.Init_Low_Power_Mode
-                0x0000000008001032       0x3a Core/Src/main.o
-                0x0000000008001032                Init_Low_Power_Mode
+                0x000000000800105a       0x3a Core/Src/main.o
+                0x000000000800105a                Init_Low_Power_Mode
  .text.Set_Low_Power_Mode
-                0x000000000800106c       0x1a Core/Src/main.o
-                0x000000000800106c                Set_Low_Power_Mode
+                0x0000000008001094       0x1a Core/Src/main.o
+                0x0000000008001094                Set_Low_Power_Mode
  .text.NMI_Handler
-                0x0000000008001086        0xe Core/Src/stm32l4xx_it.o
-                0x0000000008001086                NMI_Handler
+                0x00000000080010ae        0xe Core/Src/stm32l4xx_it.o
+                0x00000000080010ae                NMI_Handler
  .text.HardFault_Handler
-                0x0000000008001094        0x6 Core/Src/stm32l4xx_it.o
-                0x0000000008001094                HardFault_Handler
+                0x00000000080010bc        0x6 Core/Src/stm32l4xx_it.o
+                0x00000000080010bc                HardFault_Handler
  .text.MemManage_Handler
-                0x000000000800109a        0x6 Core/Src/stm32l4xx_it.o
-                0x000000000800109a                MemManage_Handler
+                0x00000000080010c2        0x6 Core/Src/stm32l4xx_it.o
+                0x00000000080010c2                MemManage_Handler
  .text.BusFault_Handler
-                0x00000000080010a0        0x6 Core/Src/stm32l4xx_it.o
-                0x00000000080010a0                BusFault_Handler
+                0x00000000080010c8        0x6 Core/Src/stm32l4xx_it.o
+                0x00000000080010c8                BusFault_Handler
  .text.UsageFault_Handler
-                0x00000000080010a6        0x6 Core/Src/stm32l4xx_it.o
-                0x00000000080010a6                UsageFault_Handler
+                0x00000000080010ce        0x6 Core/Src/stm32l4xx_it.o
+                0x00000000080010ce                UsageFault_Handler
  .text.DebugMon_Handler
-                0x00000000080010ac        0xe Core/Src/stm32l4xx_it.o
-                0x00000000080010ac                DebugMon_Handler
+                0x00000000080010d4        0xe Core/Src/stm32l4xx_it.o
+                0x00000000080010d4                DebugMon_Handler
  .text.PendSV_Handler
-                0x00000000080010ba        0xe Core/Src/stm32l4xx_it.o
-                0x00000000080010ba                PendSV_Handler
+                0x00000000080010e2        0xe Core/Src/stm32l4xx_it.o
+                0x00000000080010e2                PendSV_Handler
  .text.SystemInit
-                0x00000000080010c8       0x6c Core/Src/system_stm32l4xx.o
-                0x00000000080010c8                SystemInit
+                0x00000000080010f0       0x6c Core/Src/system_stm32l4xx.o
+                0x00000000080010f0                SystemInit
  .text.SystemCoreClockUpdate
-                0x0000000008001134      0x174 Core/Src/system_stm32l4xx.o
-                0x0000000008001134                SystemCoreClockUpdate
+                0x000000000800115c      0x174 Core/Src/system_stm32l4xx.o
+                0x000000000800115c                SystemCoreClockUpdate
  .text.Reset_Handler
-                0x00000000080012a8       0x50 Core/Startup/startup_stm32l476rgtx.o
-                0x00000000080012a8                Reset_Handler
+                0x00000000080012d0       0x50 Core/Startup/startup_stm32l476rgtx.o
+                0x00000000080012d0                Reset_Handler
  .text.Default_Handler
-                0x00000000080012f8        0x2 Core/Startup/startup_stm32l476rgtx.o
-                0x00000000080012f8                TIM1_BRK_TIM15_IRQHandler
-                0x00000000080012f8                EXTI2_IRQHandler
-                0x00000000080012f8                TIM8_TRG_COM_IRQHandler
-                0x00000000080012f8                TIM8_CC_IRQHandler
-                0x00000000080012f8                TIM1_CC_IRQHandler
-                0x00000000080012f8                TSC_IRQHandler
-                0x00000000080012f8                TAMP_STAMP_IRQHandler
-                0x00000000080012f8                EXTI3_IRQHandler
-                0x00000000080012f8                LPTIM2_IRQHandler
-                0x00000000080012f8                DFSDM1_FLT1_IRQHandler
-                0x00000000080012f8                I2C3_ER_IRQHandler
-                0x00000000080012f8                DFSDM1_FLT2_IRQHandler
-                0x00000000080012f8                EXTI0_IRQHandler
-                0x00000000080012f8                I2C2_EV_IRQHandler
-                0x00000000080012f8                CAN1_RX0_IRQHandler
-                0x00000000080012f8                FPU_IRQHandler
-                0x00000000080012f8                TIM1_UP_TIM16_IRQHandler
-                0x00000000080012f8                ADC1_2_IRQHandler
-                0x00000000080012f8                SPI1_IRQHandler
-                0x00000000080012f8                TIM6_DAC_IRQHandler
-                0x00000000080012f8                TIM8_UP_IRQHandler
-                0x00000000080012f8                DMA2_Channel2_IRQHandler
-                0x00000000080012f8                DMA1_Channel4_IRQHandler
-                0x00000000080012f8                SAI2_IRQHandler
-                0x00000000080012f8                DFSDM1_FLT3_IRQHandler
-                0x00000000080012f8                USART3_IRQHandler
-                0x00000000080012f8                DMA1_Channel7_IRQHandler
-                0x00000000080012f8                CAN1_RX1_IRQHandler
-                0x00000000080012f8                LCD_IRQHandler
-                0x00000000080012f8                UART5_IRQHandler
-                0x00000000080012f8                ADC3_IRQHandler
-                0x00000000080012f8                TIM4_IRQHandler
-                0x00000000080012f8                DMA2_Channel1_IRQHandler
-                0x00000000080012f8                QUADSPI_IRQHandler
-                0x00000000080012f8                I2C1_EV_IRQHandler
-                0x00000000080012f8                DMA1_Channel6_IRQHandler
-                0x00000000080012f8                UART4_IRQHandler
-                0x00000000080012f8                DMA2_Channel4_IRQHandler
-                0x00000000080012f8                TIM3_IRQHandler
-                0x00000000080012f8                RCC_IRQHandler
-                0x00000000080012f8                DMA1_Channel1_IRQHandler
-                0x00000000080012f8                Default_Handler
-                0x00000000080012f8                DMA2_Channel7_IRQHandler
-                0x00000000080012f8                EXTI15_10_IRQHandler
-                0x00000000080012f8                TIM7_IRQHandler
-                0x00000000080012f8                SDMMC1_IRQHandler
-                0x00000000080012f8                TIM5_IRQHandler
-                0x00000000080012f8                I2C3_EV_IRQHandler
-                0x00000000080012f8                EXTI9_5_IRQHandler
-                0x00000000080012f8                PVD_PVM_IRQHandler
-                0x00000000080012f8                SPI2_IRQHandler
-                0x00000000080012f8                CAN1_TX_IRQHandler
-                0x00000000080012f8                SVC_Handler
-                0x00000000080012f8                DMA2_Channel5_IRQHandler
-                0x00000000080012f8                DMA1_Channel5_IRQHandler
-                0x00000000080012f8                EXTI4_IRQHandler
-                0x00000000080012f8                RNG_IRQHandler
-                0x00000000080012f8                TIM1_TRG_COM_TIM17_IRQHandler
-                0x00000000080012f8                DMA1_Channel3_IRQHandler
-                0x00000000080012f8                COMP_IRQHandler
-                0x00000000080012f8                WWDG_IRQHandler
-                0x00000000080012f8                LPUART1_IRQHandler
-                0x00000000080012f8                DMA2_Channel6_IRQHandler
-                0x00000000080012f8                TIM2_IRQHandler
-                0x00000000080012f8                EXTI1_IRQHandler
-                0x00000000080012f8                USART2_IRQHandler
-                0x00000000080012f8                DFSDM1_FLT0_IRQHandler
-                0x00000000080012f8                I2C2_ER_IRQHandler
-                0x00000000080012f8                DMA1_Channel2_IRQHandler
-                0x00000000080012f8                TIM8_BRK_IRQHandler
-                0x00000000080012f8                CAN1_SCE_IRQHandler
-                0x00000000080012f8                FLASH_IRQHandler
-                0x00000000080012f8                USART1_IRQHandler
-                0x00000000080012f8                OTG_FS_IRQHandler
-                0x00000000080012f8                SPI3_IRQHandler
-                0x00000000080012f8                I2C1_ER_IRQHandler
-                0x00000000080012f8                FMC_IRQHandler
-                0x00000000080012f8                SWPMI1_IRQHandler
-                0x00000000080012f8                LPTIM1_IRQHandler
-                0x00000000080012f8                SAI1_IRQHandler
-                0x00000000080012f8                DMA2_Channel3_IRQHandler
-                0x00000000080012f8                RTC_Alarm_IRQHandler
+                0x0000000008001320        0x2 Core/Startup/startup_stm32l476rgtx.o
+                0x0000000008001320                TIM1_BRK_TIM15_IRQHandler
+                0x0000000008001320                EXTI2_IRQHandler
+                0x0000000008001320                TIM8_TRG_COM_IRQHandler
+                0x0000000008001320                TIM8_CC_IRQHandler
+                0x0000000008001320                TIM1_CC_IRQHandler
+                0x0000000008001320                TSC_IRQHandler
+                0x0000000008001320                TAMP_STAMP_IRQHandler
+                0x0000000008001320                EXTI3_IRQHandler
+                0x0000000008001320                LPTIM2_IRQHandler
+                0x0000000008001320                DFSDM1_FLT1_IRQHandler
+                0x0000000008001320                I2C3_ER_IRQHandler
+                0x0000000008001320                DFSDM1_FLT2_IRQHandler
+                0x0000000008001320                EXTI0_IRQHandler
+                0x0000000008001320                I2C2_EV_IRQHandler
+                0x0000000008001320                CAN1_RX0_IRQHandler
+                0x0000000008001320                FPU_IRQHandler
+                0x0000000008001320                TIM1_UP_TIM16_IRQHandler
+                0x0000000008001320                ADC1_2_IRQHandler
+                0x0000000008001320                SPI1_IRQHandler
+                0x0000000008001320                TIM6_DAC_IRQHandler
+                0x0000000008001320                TIM8_UP_IRQHandler
+                0x0000000008001320                DMA2_Channel2_IRQHandler
+                0x0000000008001320                DMA1_Channel4_IRQHandler
+                0x0000000008001320                SAI2_IRQHandler
+                0x0000000008001320                DFSDM1_FLT3_IRQHandler
+                0x0000000008001320                USART3_IRQHandler
+                0x0000000008001320                DMA1_Channel7_IRQHandler
+                0x0000000008001320                CAN1_RX1_IRQHandler
+                0x0000000008001320                LCD_IRQHandler
+                0x0000000008001320                UART5_IRQHandler
+                0x0000000008001320                ADC3_IRQHandler
+                0x0000000008001320                TIM4_IRQHandler
+                0x0000000008001320                DMA2_Channel1_IRQHandler
+                0x0000000008001320                QUADSPI_IRQHandler
+                0x0000000008001320                I2C1_EV_IRQHandler
+                0x0000000008001320                DMA1_Channel6_IRQHandler
+                0x0000000008001320                UART4_IRQHandler
+                0x0000000008001320                DMA2_Channel4_IRQHandler
+                0x0000000008001320                TIM3_IRQHandler
+                0x0000000008001320                RCC_IRQHandler
+                0x0000000008001320                DMA1_Channel1_IRQHandler
+                0x0000000008001320                Default_Handler
+                0x0000000008001320                DMA2_Channel7_IRQHandler
+                0x0000000008001320                EXTI15_10_IRQHandler
+                0x0000000008001320                TIM7_IRQHandler
+                0x0000000008001320                SDMMC1_IRQHandler
+                0x0000000008001320                TIM5_IRQHandler
+                0x0000000008001320                I2C3_EV_IRQHandler
+                0x0000000008001320                EXTI9_5_IRQHandler
+                0x0000000008001320                PVD_PVM_IRQHandler
+                0x0000000008001320                SPI2_IRQHandler
+                0x0000000008001320                CAN1_TX_IRQHandler
+                0x0000000008001320                SVC_Handler
+                0x0000000008001320                DMA2_Channel5_IRQHandler
+                0x0000000008001320                DMA1_Channel5_IRQHandler
+                0x0000000008001320                EXTI4_IRQHandler
+                0x0000000008001320                RNG_IRQHandler
+                0x0000000008001320                TIM1_TRG_COM_TIM17_IRQHandler
+                0x0000000008001320                DMA1_Channel3_IRQHandler
+                0x0000000008001320                COMP_IRQHandler
+                0x0000000008001320                WWDG_IRQHandler
+                0x0000000008001320                LPUART1_IRQHandler
+                0x0000000008001320                DMA2_Channel6_IRQHandler
+                0x0000000008001320                TIM2_IRQHandler
+                0x0000000008001320                EXTI1_IRQHandler
+                0x0000000008001320                USART2_IRQHandler
+                0x0000000008001320                DFSDM1_FLT0_IRQHandler
+                0x0000000008001320                I2C2_ER_IRQHandler
+                0x0000000008001320                DMA1_Channel2_IRQHandler
+                0x0000000008001320                TIM8_BRK_IRQHandler
+                0x0000000008001320                CAN1_SCE_IRQHandler
+                0x0000000008001320                FLASH_IRQHandler
+                0x0000000008001320                USART1_IRQHandler
+                0x0000000008001320                OTG_FS_IRQHandler
+                0x0000000008001320                SPI3_IRQHandler
+                0x0000000008001320                I2C1_ER_IRQHandler
+                0x0000000008001320                FMC_IRQHandler
+                0x0000000008001320                SWPMI1_IRQHandler
+                0x0000000008001320                LPTIM1_IRQHandler
+                0x0000000008001320                SAI1_IRQHandler
+                0x0000000008001320                DMA2_Channel3_IRQHandler
+                0x0000000008001320                RTC_Alarm_IRQHandler
  .text.LL_RTC_EnableInitMode
-                0x00000000080012fa       0x1c Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
+                0x0000000008001322       0x1c Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
  .text.LL_RTC_IsActiveFlag_INIT
-                0x0000000008001316       0x26 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
+                0x000000000800133e       0x26 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
  .text.LL_SYSTICK_IsActiveCounterFlag
-                0x000000000800133c       0x28 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
+                0x0000000008001364       0x28 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
  .text.LL_RTC_EnterInitMode
-                0x0000000008001364       0x66 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
-                0x0000000008001364                LL_RTC_EnterInitMode
- *fill*         0x00000000080013ca        0x2 
+                0x000000000800138c       0x66 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
+                0x000000000800138c                LL_RTC_EnterInitMode
+ *fill*         0x00000000080013f2        0x2 
  .text.LL_InitTick
-                0x00000000080013cc       0x34 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
+                0x00000000080013f4       0x34 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
  .text.LL_Init10msTick
-                0x0000000008001400       0x18 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
-                0x0000000008001400                LL_Init10msTick
+                0x0000000008001428       0x18 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
+                0x0000000008001428                LL_Init10msTick
  .text.__libc_init_array
-                0x0000000008001418       0x48 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
-                0x0000000008001418                __libc_init_array
+                0x0000000008001440       0x48 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/libc_nano.a(lib_a-init.o)
+                0x0000000008001440                __libc_init_array
  *(.glue_7)
- .glue_7        0x0000000008001460        0x0 linker stubs
+ .glue_7        0x0000000008001488        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008001460        0x0 linker stubs
+ .glue_7t       0x0000000008001488        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x0000000008001460        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x0000000008001488        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x0000000008001460        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x0000000008001460                _init
- .init          0x0000000008001464        0x8 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x0000000008001488        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008001488                _init
+ .init          0x000000000800148c        0x8 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x000000000800146c        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x000000000800146c                _fini
- .fini          0x0000000008001470        0x8 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x0000000008001478                . = ALIGN (0x4)
-                0x0000000008001478                _etext = .
+ .fini          0x0000000008001494        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008001494                _fini
+ .fini          0x0000000008001498        0x8 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x00000000080014a0                . = ALIGN (0x4)
+                0x00000000080014a0                _etext = .
 
-.vfp11_veneer   0x0000000008001478        0x0
- .vfp11_veneer  0x0000000008001478        0x0 linker stubs
+.vfp11_veneer   0x00000000080014a0        0x0
+ .vfp11_veneer  0x00000000080014a0        0x0 linker stubs
 
-.v4_bx          0x0000000008001478        0x0
- .v4_bx         0x0000000008001478        0x0 linker stubs
+.v4_bx          0x00000000080014a0        0x0
+ .v4_bx         0x00000000080014a0        0x0 linker stubs
 
-.iplt           0x0000000008001478        0x0
- .iplt          0x0000000008001478        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x00000000080014a0        0x0
+ .iplt          0x00000000080014a0        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x0000000008001478       0x40
-                0x0000000008001478                . = ALIGN (0x4)
+.rodata         0x00000000080014a0       0x40
+                0x00000000080014a0                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x0000000008001478       0x10 Core/Src/system_stm32l4xx.o
-                0x0000000008001478                AHBPrescTable
+                0x00000000080014a0       0x10 Core/Src/system_stm32l4xx.o
+                0x00000000080014a0                AHBPrescTable
  .rodata.MSIRangeTable
-                0x0000000008001488       0x30 Core/Src/system_stm32l4xx.o
-                0x0000000008001488                MSIRangeTable
-                0x00000000080014b8                . = ALIGN (0x4)
+                0x00000000080014b0       0x30 Core/Src/system_stm32l4xx.o
+                0x00000000080014b0                MSIRangeTable
+                0x00000000080014e0                . = ALIGN (0x4)
 
-.rel.dyn        0x00000000080014b8        0x0
- .rel.iplt      0x00000000080014b8        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x00000000080014e0        0x0
+ .rel.iplt      0x00000000080014e0        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.ARM.extab      0x00000000080014b8        0x0
-                0x00000000080014b8                . = ALIGN (0x4)
+.ARM.extab      0x00000000080014e0        0x0
+                0x00000000080014e0                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000080014b8                . = ALIGN (0x4)
+                0x00000000080014e0                . = ALIGN (0x4)
 
-.ARM            0x00000000080014b8        0x0
-                0x00000000080014b8                . = ALIGN (0x4)
-                0x00000000080014b8                __exidx_start = .
+.ARM            0x00000000080014e0        0x0
+                0x00000000080014e0                . = ALIGN (0x4)
+                0x00000000080014e0                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080014b8                __exidx_end = .
-                0x00000000080014b8                . = ALIGN (0x4)
+                0x00000000080014e0                __exidx_end = .
+                0x00000000080014e0                . = ALIGN (0x4)
 
-.preinit_array  0x00000000080014b8        0x0
-                0x00000000080014b8                . = ALIGN (0x4)
-                0x00000000080014b8                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x00000000080014e0        0x0
+                0x00000000080014e0                . = ALIGN (0x4)
+                0x00000000080014e0                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x00000000080014b8                PROVIDE (__preinit_array_end = .)
-                0x00000000080014b8                . = ALIGN (0x4)
+                0x00000000080014e0                PROVIDE (__preinit_array_end = .)
+                0x00000000080014e0                . = ALIGN (0x4)
 
-.init_array     0x00000000080014b8        0x4
-                0x00000000080014b8                . = ALIGN (0x4)
-                0x00000000080014b8                PROVIDE (__init_array_start = .)
+.init_array     0x00000000080014e0        0x4
+                0x00000000080014e0                . = ALIGN (0x4)
+                0x00000000080014e0                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x00000000080014b8        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x00000000080014bc                PROVIDE (__init_array_end = .)
-                0x00000000080014bc                . = ALIGN (0x4)
+ .init_array    0x00000000080014e0        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x00000000080014e4                PROVIDE (__init_array_end = .)
+                0x00000000080014e4                . = ALIGN (0x4)
 
-.fini_array     0x00000000080014bc        0x4
-                0x00000000080014bc                . = ALIGN (0x4)
+.fini_array     0x00000000080014e4        0x4
+                0x00000000080014e4                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080014bc        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .fini_array    0x00000000080014e4        0x4 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000080014c0                . = ALIGN (0x4)
-                0x00000000080014c0                _sidata = LOADADDR (.data)
+                0x00000000080014e8                . = ALIGN (0x4)
+                0x00000000080014e8                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x8 load address 0x00000000080014c0
+.data           0x0000000020000000        0x8 load address 0x00000000080014e8
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1307,11 +1308,11 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x0000000020000008                . = ALIGN (0x4)
                 0x0000000020000008                _edata = .
 
-.igot.plt       0x0000000020000008        0x0 load address 0x00000000080014c8
+.igot.plt       0x0000000020000008        0x0 load address 0x00000000080014f0
  .igot.plt      0x0000000020000008        0x0 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.macos64_1.4.0.202007081208/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 0x0000000020000008                . = ALIGN (0x4)
 
-.bss            0x0000000020000008       0x24 load address 0x00000000080014c8
+.bss            0x0000000020000008       0x24 load address 0x00000000080014f0
                 0x0000000020000008                _sbss = .
                 0x0000000020000008                __bss_start__ = _sbss
  *(.bss)
@@ -1327,7 +1328,7 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x000000002000002c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x000000002000002c      0x604 load address 0x00000000080014c8
+                0x000000002000002c      0x604 load address 0x00000000080014f0
                 0x0000000020000030                . = ALIGN (0x8)
  *fill*         0x000000002000002c        0x4 
                 [!provide]                        PROVIDE (end = .)
@@ -1451,14 +1452,14 @@ OUTPUT(Opti_uC.elf elf32-littlearm)
  .debug_macro   0x000000000001ea32      0x19f Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
  .debug_macro   0x000000000001ebd1       0xa1 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
 
-.debug_line     0x0000000000000000     0x2f44
- .debug_line    0x0000000000000000      0x5d4 Core/Src/gpio.o
- .debug_line    0x00000000000005d4      0xbdc Core/Src/main.o
- .debug_line    0x00000000000011b0      0x648 Core/Src/stm32l4xx_it.o
- .debug_line    0x00000000000017f8      0x496 Core/Src/system_stm32l4xx.o
- .debug_line    0x0000000000001c8e       0x87 Core/Startup/startup_stm32l476rgtx.o
- .debug_line    0x0000000000001d15      0x8f9 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
- .debug_line    0x000000000000260e      0x936 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
+.debug_line     0x0000000000000000     0x2f4c
+ .debug_line    0x0000000000000000      0x5d5 Core/Src/gpio.o
+ .debug_line    0x00000000000005d5      0xbe3 Core/Src/main.o
+ .debug_line    0x00000000000011b8      0x648 Core/Src/stm32l4xx_it.o
+ .debug_line    0x0000000000001800      0x496 Core/Src/system_stm32l4xx.o
+ .debug_line    0x0000000000001c96       0x87 Core/Startup/startup_stm32l476rgtx.o
+ .debug_line    0x0000000000001d1d      0x8f9 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.o
+ .debug_line    0x0000000000002616      0x936 Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.o
 
 .debug_str      0x0000000000000000    0xac966
  .debug_str     0x0000000000000000    0x9f884 Core/Src/gpio.o
